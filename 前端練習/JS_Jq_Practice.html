@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<title>JS & JQuery practice</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        div {height: 7cm;}
+        #div1 {display: none;}
+        #Customers td {padding: 5px;}
+        #Customers th {font-weight: bolder; padding: 5px;}
+        #addButton {height: 30px}
+        #keyInData td {padding: 5px;
+            font-weight: bolder;
+            text-align: left;
+            }
+        #keyInData {height: 4.5cm;}
+        #submit {text-align: center; width: 15%; padding: 5px;}
+        
+    </style>
+</head>
+
+<body>
+    
+    <div id="div1">
+        <h2 id="replacedWord">
+            新增
+        </h2>
+            <div id="keyInData">
+            <table align="left">
+                <tr>
+                    <td>CompanyName :</td>
+                    <td><input type="text" id="companyName"></td>
+                </tr>
+                <tr>
+                    <td>ContactName :</td>
+                    <td><input type="text" id="contactName"></td>
+                </tr>
+                <tr>
+                    <td>ContactTitle :</td>
+                    <td><input type="text" id="contactTitle"></td>
+                </tr>
+                <tr>
+                    <td>Address :</td>
+                    <td><input type="text" id="address"></td>
+                </tr>
+                <tr>
+                    <td>Phone :</td>
+                    <td><input type="text" id="phone"></td>
+                </tr>
+            </table>
+            </div>
+    
+            <div id="submit">
+                <input type="submit" value="存檔" id="save" onsubmit="saveInput()">&nbsp;
+                <input type="button" value="取消" id="cancel" onclick="cancelInput()">
+            </div>
+        </div>
+
+    <div id="div2">
+    <form>
+        <div id="addButton" >
+        <table align="left">
+            <tr>        
+                <td>
+                    <input type="button" id="addData" value="新增" onclick="addInput()">
+                </td>
+            </tr>
+        </table>
+        </div>
+
+        <table border="1" align="left" id="Customers">
+            <tr id="rowTitle">
+                <th>CompanyName</th>
+                <th>ContactName</th>
+                <th>ContactTitle</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>&nbsp</th>
+            </tr>
+        </table>
+    </form>
+    </div>
+</body>
+<script type="text/javascript">
+
+    function addInput() {
+        document.getElementById("div1").style.display = "block";
+        document.getElementById("div2").style.display = "none";
+    }
+    
+    function cancelInput() {
+
+        document.getElementById("div1").style.display = "none";
+        document.getElementById("div2").style.display = "block";
+
+    }
+
+    function deleteData(obj) {
+        var index = obj.parentNode.parentNode.rowIndex;
+        document.getElementById("Customers").deleteRow(index);
+    }
+
+    var rowdata = null;
+    function editData(obj){
+        
+        document.getElementById("div1").style.display = "block";
+        document.getElementById("div2").style.display = "none";
+
+        var replacedWord = document.getElementById("replacedWord").innerHTML;
+        var newWord = replacedWord.replace("新增", "修改");
+        document.getElementById("replacedWord").innerHTML = newWord;
+
+        rowdata = $(obj).parents("tr");
+        var cols = rowdata.children("td");
+
+        $("#companyName").val($(cols[0]).text());
+        $("#contactName").val($(cols[1]).text());
+        $("#contactTitle").val($(cols[2]).text());
+        $("#address").val($(cols[3]).text());
+        $("#phone").val($(cols[4]).text());
+        
+        $("#save").text("nowEdit");
+
+    }
+
+    $("#save").click(function(){
+        
+        $("#div2").show()
+        if($("#save").text() == "nowEdit") {
+            saveAfterEdit();
+        }else{
+            saveData();
+        }
+  
+        clearInputText()
+        document.getElementById("div1").style.display = "none";
+    });
+
+    function saveAfterEdit() {
+
+        $(rowdata).after(productBuildTableRow());
+
+        $(rowdata).remove();
+        $("#save").text("存檔");    
+
+        var replacedWord = document.getElementById("replacedWord").innerHTML;
+        var newWord = replacedWord.replace("修改", "新增");
+        document.getElementById("replacedWord").innerHTML = newWord;
+
+    }
+
+    function saveData() {
+        
+
+        $("#Customers tbody").append(productBuildTableRow());
+
+    }
+
+    function productBuildTableRow() {
+
+        var companyName = $("#companyName").val();
+        var contactName = $("#contactName").val();
+        var phone = $("#phone").val();
+
+        var result = 
+        "<tr>"+"<td>" + $("#companyName").val() + "</td>"+
+        "<td>" + $("#contactName").val() + "</td>" +
+        "<td>" + $("#contactTitle").val() + "</td>" +
+        "<td>" + $("#address").val() + "</td>" +
+        "<td>" + $("#phone").val() + "</td>" +
+        "<td>" + "<input type='button' value='修改' onclick='editData(this)'>&nbsp"+
+        "<input type='button' value='刪除' onclick='deleteData(this)'>"+ "</td>"
+
+        return result;
+     
+    }
+
+    function clearInputText() {
+
+        $("#companyName").val('');
+        $("#contactName").val('');
+        $("#contactTitle").val('');
+        $("#address").val('');
+        $("#phone").val('');
+
+    }
+
+</script>
+</html>

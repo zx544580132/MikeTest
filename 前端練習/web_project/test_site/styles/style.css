@@ -1,0 +1,19 @@
+body {
+	background-color:  #f9f9f9;
+	}
+table, th, td {
+	border: 1px solid black;
+	}
+ th, td {
+	padding: 4px;
+	}
+table{
+	width: 85%; 
+	margin: 10px auto;
+	}
+input[type=submit], input[type=reset] {
+	padding-top:2px;
+	padding-bottom:4px;
+	padding-right:6px;
+	padding-left:6px;
+	}

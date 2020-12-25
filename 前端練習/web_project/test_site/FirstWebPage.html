@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>FirstWebPage</title>
+	<link rel="stylesheet" href="styles\style.css">
+	<script type="text/javascript" src="scripts\main.js"></script>
+</head>
+
+<body>
+<div style="border-bottom: 1px solid; width: 100%; text-align: center;"> 
+	<h1>HTML個人介紹</h1>
+</div>
+
+<form name="myform" id="myform" onsubmit="return validation()" action="" method="post">
+<table>		
+	
+	<tr>
+		<th>姓名:  
+		<td><input type="text" name="myname" size="23" >
+	</tr>
+	<tr>
+		<th>性別:  
+		<td><input type="radio" name="gender" id="gender" value="male" onClick="genderCheck=0">男 
+		    <input type="radio" name="gender" id="gender" value="female" onClick="genderCheck=1">女
+	</tr>
+
+	<tr>
+		<th>最高學歷: 
+		<td><select name="edu">
+			<option>請選擇</option>
+			<option>博士</option>
+			<option>碩士</option>
+			<option>大學</option>
+			<option>高中</option>
+	</tr>
+	<tr>
+	<th>自傳:
+	<td><textarea name="intro" rows="15" cols="90" style="resize:none;"></textarea>
+	</tr>
+
+</table>	
+<div style="text-align: center;"> 		
+	<input type="submit" value="提交"> <input type="reset" value="清除">
+</div>
+</form>
+
+</body>
+</html>
