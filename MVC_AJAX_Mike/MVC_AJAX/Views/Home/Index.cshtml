@@ -1,0 +1,101 @@
+﻿@model IEnumerable<MVC_AJAX.Models.Customers>
+
+@{
+    ViewBag.Title = "Index";
+
+}
+
+<div id="createAndUpdate" style="display:none ;margin:0px 10px 0px 15px">
+    <h4>Create and Update</h4>
+    <br />
+    <table>
+        <tr>
+            <th>CustomerID:&emsp;</th>
+            <td>
+                <input type="text" id="customerID" placeholder="請填寫ID" />
+            </td>
+        </tr>
+        <tr>
+            <th>CompanyName:&emsp;</th>
+            <td>
+                <input type="text" id="companyName" placeholder="請填寫公司稱" />
+            </td>
+        </tr>
+        <tr>
+            <th>ContactName:&emsp;</th>
+            <td>
+                <input type="text" id="contactName" />
+            </td>
+        </tr>
+        <tr>
+            <th>Phone:&emsp;</th>
+            <td>
+                <input type="text" id="phone" />
+            </td>
+        </tr>
+    </table>
+    <br />
+    <table>
+        <tr>
+            <th colspan="2" style="text-align: center">
+                <button id="saveBtn" value="save">存檔</button>
+                <button id="updateBtn" value="update" style="display:none">存檔</button>
+                <button id="cancelBtn" value="cancel">取消</button>
+            </th>
+        </tr>
+    </table>
+</div>
+
+<div id="listPage" style="margin:0px 10px 0px 15px">
+    <div style="height:35px">
+        <input type="text" id="searchID" placeholder="查詢ID" />&nbsp;
+        <input type="text" id="searchComp" placeholder="查詢公司" />&nbsp;
+        <button id="search">查詢</button>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    CustomerID
+                </th>
+                <th>
+                    CompanyName
+                </th>
+                <th>
+                    ContactName
+                </th>
+                <th>
+                    Phone
+                </th>
+                <th>
+                    <button type="button" id="addBtn" name="addBtn">新增</button>
+                </th>
+            </tr>
+        </thead>
+
+        <tbody id="setList">
+        </tbody>
+    </table>
+    <table>
+        <tr>
+            <td>
+                <input type="text" id="pageNo" hidden/>
+                <button type="button" id="firstPage">第一頁</button>&nbsp;
+            </td>
+            <td>
+                <button type="button" id="prePage">上一頁 </button>&nbsp;
+            </td>
+            <td>
+                <button type="button" id="nextPage">下一頁</button>&nbsp;
+            </td>
+            <td>
+                <input type="text" id="totalPage" hidden/>
+                <button type="button" id="lastPage">最後頁</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/MVC_AJAX_js.js"></script>
